@@ -162,7 +162,44 @@ TranslationUnitDecl 0x2088ca7afa8 <<invalid sloc>> <invalid sloc>
       `-IntegerLiteral 0x2088e50ca40 <col:9> 'int' 0
 ```
 
+## IRCodenGen
+```batch
+clang -S -emit-llvm main.cpp
+```
+->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+```LLVM
+; ModuleID = 'main.cpp'
+source_filename = "main.cpp"
+target datalayout = "e-m:w-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-windows-msvc19.31.31104"
 
+; Function Attrs: mustprogress noinline nounwind null_pointer_is_valid optnone uwtable
+define dso_local noundef i32 @"?add@@YAHHH@Z"(i32 noundef %0, i32 noundef %1) #0 {
+  %3 = alloca i32, align 4
+  %4 = alloca i32, align 4
+  store i32 %1, i32* %3, align 4
+  store i32 %0, i32* %4, align 4
+  %5 = load i32, i32* %4, align 4
+  %6 = load i32, i32* %3, align 4
+  %7 = add nsw i32 %5, %6
+  %8 = add nsw i32 %7, 3389
+  ret i32 %8
+}
+
+; Function Attrs: mustprogress noinline norecurse nounwind null_pointer_is_valid optnone uwtable
+define dso_local noundef i32 @main(i32 noundef %0, i8** noundef %1) #1 {
+  %3 = alloca i32, align 4
+  %4 = alloca i8**, align 8
+  %5 = alloca i32, align 4
+  %6 = alloca i32, align 4
+  store i32 0, i32* %3, align 4
+  store i8** %1, i8*** %4, align 8
+  store i32 %0, i32* %5, align 4
+  %7 = call noundef i32 @"?add@@YAHHH@Z"(i32 noundef 1, i32 noundef 2)
+  store i32 %7, i32* %6, align 4
+  ret i32 0
+}
+```
 
 
 
