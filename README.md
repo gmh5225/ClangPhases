@@ -108,6 +108,59 @@ r_brace '}'      [StartOfLine]  Loc=<main.cpp:8:1>
 eof ''          Loc=<main.cpp:9:1>
 ```
 
+## Parser
+```batch
+clang -fmodules -fsyntax-only -Xclang -ast-dump main.cpp
+```
+->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+```C++
+Program arguments:clang.exe -fmodules -fsyntax-only -Xclang -ast-dump main.cpp
+TranslationUnitDecl 0x2088ca7afa8 <<invalid sloc>> <invalid sloc>
+|-CXXRecordDecl 0x2088ca7b7f8 <<invalid sloc>> <invalid sloc> implicit struct _GUID
+| `-TypeVisibilityAttr 0x2088ca7b8b0 <<invalid sloc>> Implicit Default
+|-TypedefDecl 0x2088ca7b928 <<invalid sloc>> <invalid sloc> implicit __int128_t '__int128'
+| `-BuiltinType 0x2088ca7b570 '__int128'
+|-TypedefDecl 0x2088ca7b998 <<invalid sloc>> <invalid sloc> implicit __uint128_t 'unsigned __int128'
+| `-BuiltinType 0x2088ca7b590 'unsigned __int128'
+|-TypedefDecl 0x2088ca7bd58 <<invalid sloc>> <invalid sloc> implicit __NSConstantString '__NSConstantString_tag'
+| `-RecordType 0x2088ca7baa0 '__NSConstantString_tag'
+|   `-CXXRecord 0x2088ca7b9f0 '__NSConstantString_tag'
+|-CXXRecordDecl 0x2088ca7bdb0 <<invalid sloc>> <invalid sloc> implicit class type_info
+| `-TypeVisibilityAttr 0x2088ca7be80 <<invalid sloc>> Implicit Default
+|-TypedefDecl 0x2088ca7bef8 <<invalid sloc>> <invalid sloc> implicit size_t 'unsigned long long'
+| `-BuiltinType 0x2088ca7b190 'unsigned long long'
+|-TypedefDecl 0x2088e50c070 <<invalid sloc>> <invalid sloc> implicit __builtin_ms_va_list 'char *'
+| `-PointerType 0x2088ca7bf50 'char *'
+|   `-BuiltinType 0x2088ca7b050 'char'
+|-TypedefDecl 0x2088e50c0e0 <<invalid sloc>> <invalid sloc> implicit __builtin_va_list 'char *'
+| `-PointerType 0x2088ca7bf50 'char *'
+|   `-BuiltinType 0x2088ca7b050 'char'
+|-FunctionDecl 0x2088e50c2e0 <main.cpp:2:1, line:4:1> line:2:5 used add 'int (int, int)'
+| |-ParmVarDecl 0x2088e50c150 <col:9, col:13> col:13 used a 'int'
+| |-ParmVarDecl 0x2088e50c1d0 <col:16, col:20> col:20 used b 'int'
+| `-CompoundStmt 0x2088e50c4d8 <col:23, line:4:1>
+|   `-ReturnStmt 0x2088e50c4c8 <line:3:2, line:1:15>
+|     `-BinaryOperator 0x2088e50c4a8 <line:3:9, line:1:15> 'int' '+'
+|       |-BinaryOperator 0x2088e50c460 <line:3:9, col:13> 'int' '+'
+|       | |-ImplicitCastExpr 0x2088e50c430 <col:9> 'int' <LValueToRValue>
+|       | | `-DeclRefExpr 0x2088e50c3f0 <col:9> 'int' lvalue ParmVar 0x2088e50c150 'a' 'int'
+|       | `-ImplicitCastExpr 0x2088e50c448 <col:13> 'int' <LValueToRValue>
+|       |   `-DeclRefExpr 0x2088e50c410 <col:13> 'int' lvalue ParmVar 0x2088e50c1d0 'b' 'int'
+|       `-IntegerLiteral 0x2088e50c480 <line:1:15> 'int' 3389
+`-FunctionDecl 0x2088e50c770 <line:5:1, line:8:1> line:5:5 main 'int (int, const char **)'
+  |-ParmVarDecl 0x2088e50c508 <col:10, col:14> col:14 argc 'int'
+  |-ParmVarDecl 0x2088e50c620 <col:20, col:37> col:32 argv 'const char **':'const char **'
+  `-CompoundStmt 0x2088e50ca78 <col:40, line:8:1>
+    |-DeclStmt 0x2088e50ca28 <line:6:2, col:19>
+    | `-VarDecl 0x2088e50c878 <col:2, col:18> col:6 a 'int' cinit
+    |   `-CallExpr 0x2088e50c9e0 <col:10, col:18> 'int'
+    |     |-ImplicitCastExpr 0x2088e50c9c8 <col:10> 'int (*)(int, int)' <FunctionToPointerDecay>
+    |     | `-DeclRefExpr 0x2088e50c978 <col:10> 'int (int, int)' lvalue Function 0x2088e50c2e0 'add' 'int (int, int)'
+    |     |-IntegerLiteral 0x2088e50c928 <col:14> 'int' 1
+    |     `-IntegerLiteral 0x2088e50c950 <col:17> 'int' 2
+    `-ReturnStmt 0x2088e50ca68 <line:7:2, col:9>
+      `-IntegerLiteral 0x2088e50ca40 <col:9> 'int' 0
+```
 
 
 
