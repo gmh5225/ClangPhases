@@ -203,7 +203,7 @@ define dso_local noundef i32 @main(i32 noundef %0, i8** noundef %1) #1 {
 
 ## IR2Assembly
 ```batch
-clang -S main.ll -o mian.s
+clang -S main.ll -o main.s
 ```
 ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ```ASM
@@ -277,7 +277,10 @@ main:                                   # @main
 
 ```
 
-
+## Assembly2Obj
+```batch
+clang -fmodules -c main.s -o main.o
+```
 
 
 
